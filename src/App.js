@@ -8,7 +8,7 @@ const boldStyle = {
 }
 
 const MovieInfo = (props) => {
-  if (props.movieFound) {
+  if (props.movieFound === 'yes') {
     return (
       <div id='movieDiv'>
        <p><span style={boldStyle}>Year: </span>{props.movieInfo.year}</p>
@@ -16,6 +16,8 @@ const MovieInfo = (props) => {
        <p><span style={boldStyle}>Plot: </span>{props.movieInfo.plot}</p>
       </div>
     );
+  } else if (props.movieFound === 'no') {
+    return (<p>Movie not found.</p>);
   } else {return null;}
 }
 
@@ -40,7 +42,7 @@ class App extends Component {
         director: '',
         plot: ''
       },
-      movieFound: false,
+      movieFound: '',
       validated: false,
     }
     this.search = this.search.bind(this);
@@ -54,17 +56,27 @@ class App extends Component {
     const promise = axios.get('http://www.omdbapi.com/?apikey=b3427722&t=' + this.state.currentMovie)
 
     promise.then(({data}) => {
-      console.log(data);
-      let movieInfo = {
+      if (data.Response === 'False') {
+        this.setState({
+          movieInfo: {
+            year: '',
+            director: '',
+            plot: ''},
+          movieFound: 'no'}
+        );
+      } else {
+        let movieInfo = {
         year: data.Year,
         director: data.Director,
         plot: data.Plot
+        }
+        this.setState({movieInfo, movieFound: 'yes'})
       }
-      this.setState({movieInfo, movieFound: true})
     })
 
     promise.catch(err =>{
       window.alert("There was an error retrieving movie data.");
+      this.setState({movieFound: 'no'});
       console.log(err);
     })
   }
