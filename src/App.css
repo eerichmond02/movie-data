@@ -1,0 +1,67 @@
+.App {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 400px;
+  font-size: 14px;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-title {
+  margin-top: 20px;
+  font-size: 2em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+#searchBox {
+  background-image: url('img/magnifying2.png');
+  background-repeat: no-repeat;
+  background-position: left;
+  text-indent: 30px;
+  flex-grow: 2;
+}
+
+#searchButton {
+  height: 40px;
+  margin-left: 20px;
+  padding-right: 20px;
+  padding-left: 20px;
+  margin-bottom:0px;
+}
+
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#movieDiv {
+  width: 100%;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.boldText {
+  font-weight: bold;
+}
+
+.fillFlex {
+  flex-grow: 2;
+}
